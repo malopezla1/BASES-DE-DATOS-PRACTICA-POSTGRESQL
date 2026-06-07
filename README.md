@@ -5,7 +5,7 @@ Para la siguiente practica en postgreSQL, se creo una base de datos bastante sim
 Se le aplicara a la base de datos, editada en pgAdmin4, los procesos de DDL, DML y PSQL.
 
 # DDL (Data Definition Language): 
-Es el proceso de definir, crear y modificar la estructura de los objetos en una base de datos. 
+Es el proceso de definir, crear y modificar la estructura de los objetos en una base de datos, es decir, columnas. 
 
 ```sql
 CREATE TABLE carrera (
@@ -38,7 +38,27 @@ CREATE TABLE matricula (
     FOREIGN KEY (cod_estudiante) REFERENCES estudiante(cod_estudiante),
     FOREIGN KEY (cod_materia) REFERENCES materias(cod_materia));
 ```
-Insertamos datos en cada tabla de la siguiente forma:
+
+Hemos definido y creado la estructura, solo queda el proceso de modificar, asi que para ejemplificar el ultimo paso de el DLL (modificar), haremos uso de ```DROP``` y ```ALTER``` para eliminar una columna, luego volverla a crear. Aunque esto se puede usar usando simplemente la función ```RENAME```, lo hacemos por el metodo largo para mostrar el uso de estas funciones tan usadas.
+
+## Eliminar Columna "Ano" de la tabla matricula
+```sql
+ALTER TABLE matricula DROP COLUMN ano;
+```
+
+## Crear la nueva Columna "Anio"
+```sql
+ALTER TABLE matricula ADD anio int;
+```
+
+Con esto finalizaria la explicación y ejemplificación de lo que consiste aplica DLL en las bases de datos.
+Seguimos con la aplicación de DML.
+
+# DML (Data Manipulation Lenguage)
+Consiste en la gestión, modificación y recuperación de datos dentro de una base da datos. Siendo sus cuatro comandos basicos: ```SELECT```, ```INSERT```, ```UPDATE``` y ```DELETE```.
+
+Insertamos datos en cada tabla de la siguiente forma, haciendo uso de la función ```INSERT```:
+(Las siguientes lineas de código muestran el proceso de insertar datos antes del cambio de nombre de la columna ano a anio)
 
 ## Tabla Carrera
 ```sql
@@ -96,4 +116,27 @@ VALUES
 	(120180, 102, 2026, 1, 4.8);
 ```
 
-Hemos definido, creado e insertado datos, asi que para ejemplificar el ultimo paso de el DLL (modificar), haremos uso de ```DROP``` y ```ALTER``` para eliminar una columna, luego volverla a crear y reinsertar datos. 
+Entonces si teniamos una columna "ano" rellena de datos y la eliminamos, al crear la columna que la reempleza llamada "anio", nos toca de forma manual volver a reinsertar los datos eliminados, de la siguiente forma:
+
+## Rellenar esa nueva columna
+```sql
+UPDATE matricula SET anio = 2025 WHERE cod_estudiante = 100056 AND cod_materia = 105;
+UPDATE matricula SET anio = 2025 WHERE cod_estudiante = 100056 AND cod_materia = 106;
+UPDATE matricula SET anio = 2026 WHERE cod_estudiante = 100100 AND cod_materia = 101;
+UPDATE matricula SET anio = 2026 WHERE cod_estudiante = 100100 AND cod_materia = 102;
+UPDATE matricula SET anio = 2025 WHERE cod_estudiante = 110120 AND cod_materia = 103;
+UPDATE matricula SET anio = 2026 WHERE cod_estudiante = 110120 AND cod_materia = 104;
+UPDATE matricula SET anio = 2026 WHERE cod_estudiante = 120180 AND cod_materia = 101;
+UPDATE matricula SET anio = 2026 WHERE cod_estudiante = 120180 AND cod_materia = 102;
+```
+
+¿Qué ocurre con este metodo de actualización de una columna sin usar la función ```RENAME```?
+
+Ocurre que esta forma de hacer el renombramiento es mas tardada, desgastaste e inefectiva, ya que nuestra columna original estaba ubicada en una posición 3, pero al eliminarla y crear una con nombre nuevo y mismos datos, cambio su posición hasta ultimo lugar. Por lo cual siempre sera mejor usar ```RENAME```, aunque no se usara para mostrar las funcionalidades de las otras 2 funciones.
+
+
+
+
+
+
+
