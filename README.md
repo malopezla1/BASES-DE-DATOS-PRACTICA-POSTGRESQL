@@ -2,7 +2,7 @@
 
 Para la siguiente practica en postgreSQL, se creo una base de datos bastante simple de la estructura de una universidad en su proceso de registro de notas, estudiantes, profesores, etc..., a partir de su respectivo diagrama MER y MR por lo cual no fue necesario normalizar.
 
-Se le aplicara a la base de datos, editada en pgAdmin4, los procesos de DDL, DML y PSQL.
+Se le aplicara a la base de datos, editada en pgAdmin4, los procesos de DDL, DML.
 
 # DDL (Data Definition Language): 
 Es el proceso de definir, crear y modificar la estructura de los objetos en una base de datos, es decir, columnas. 
@@ -177,6 +177,14 @@ WHERE e.cod_estudiante = 100056 AND m.cod_materia = 106;
 El ```AS``` es simplemente un apodo que le damos al encabezado original de las columnas para dar un resultado mas limpio y claro, ya que por ejemplo, el "nombre" de la materia en su tabla original es un encabezado que funciona pero aqui puede resultar ambiguo, asi que se renombra solo para esta consulta como "materia".
 
 ## Delete
-Sirve para eliminara una fila de información especifica.
-
-
+Sirve para eliminar una fila de información especifica. Por lo que crearemos una nueva fila y despues la eliminaremos para ejemplificar.
+```sql
+INSERT INTO carrera(cod_carrera, nombre, facultad)
+VALUES
+	('5', 'Medicina', 'Facultad de Medicina');
+```
+Podemos consultar la tabla para ver que se ha creado una nueva fila para estar claros, lo mismo para saber si se elimino.
+```sql
+DELETE FROM carrera WHERE cod_carrera = '5';
+```
+Con esto quedaria eliminado.
