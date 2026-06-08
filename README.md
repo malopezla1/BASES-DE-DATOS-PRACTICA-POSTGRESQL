@@ -188,3 +188,6 @@ Podemos consultar la tabla para ver que se ha creado una nueva fila para estar c
 DELETE FROM carrera WHERE cod_carrera = '5';
 ```
 Con esto quedaria eliminado.
+
+Ahora se continuara con el apartado de joins y consultas avanzadas
+[Ir a Consultas Avanzadas (Joins)](CONSULTAS_AVANZADAS.md)
