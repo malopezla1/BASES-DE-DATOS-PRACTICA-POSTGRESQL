@@ -134,9 +134,49 @@ UPDATE matricula SET anio = 2026 WHERE cod_estudiante = 120180 AND cod_materia =
 
 Ocurre que esta forma de hacer el renombramiento es mas tardada, desgastaste e inefectiva, ya que nuestra columna original estaba ubicada en una posición 3, pero al eliminarla y crear una con nombre nuevo y mismos datos, cambio su posición hasta ultimo lugar. Por lo cual siempre sera mejor usar ```RENAME```, aunque no se usara para mostrar las funcionalidades de las otras 2 funciones.
 
+Ahora vamos a ver el uso de nuestras 3 funciones basicas restantes.
 
+## Select
 
+Quiero saber la nota final de cada estudiante, para esto hacemos una consulta con ```SELECT```.
+```sql
+SELECT cod_estudiante, nota_final FROM matricula;
+```
+Esto mostrara la nota final junto a el codigo de cada estudiante, pero si queremos algo mas estructurado y facil de leer por un cliente podemos hacer uso de otras herramientos como los joins, que juntas datos de dos o mas tablas para una consulta mas completa, en este caso se usara el ```INNER JOIN```, que nos permite combinar filas de dos o mas tablas, para usar elementos que solo esten presentes en las dos (intersección de conjuntos).
 
+## Select + Inner Join
+```sql
+SELECT 
+	e.cod_estudiante,
+	e.nombre_completo,
+	m.cod_materia,
+	m.nota_final
+FROM estudiante e INNER JOIN matricula m ON e.cod_estudiante = m.cod_estudiante;
+```
+La e es un alias que se le asigan a la tabla estudiante para tener que evitar escribir la palabra completa, lo mismo pasa con la m.
 
+Esto nos dara como salida el codigo de estudiante, su nombre, la materia que curso y su respectiva nota, y para ser mas claros podriamos agregar el nombre de la materia, pero lo mostraremos mas adelante. 
+
+## Update
+Pensemos que una nota registrada se hizo mal y necesita cambiarse, para hacerlo usaremos el ```UPDATE``` para modificar valores existentes. Por ejemplo, la estudiante Laura Garcia tiene registrado un 1.7 pero en realidad era un 2.1, cambiaremos ese dato. 
+```sql
+UPDATE matricula SET nota_final = 2.1 WHERE cod_estudiante = 100056 AND cod_materia = 106;
+```
+Ahora hagamos la consulta para verificar el cambio, ahora mostrado el nombre de la materia en vez de su codigo.
+```sql
+SELECT 
+	e.cod_estudiante, 
+	e.nombre_completo AS estudiante,
+	mat.nombre AS materia,
+	m.nota_final
+FROM estudiante e 
+INNER JOIN matricula m ON e.cod_estudiante = m.cod_estudiante
+INNER JOIN materias mat ON m.cod_materia = mat.cod_materia
+WHERE e.cod_estudiante = 100056 AND m.cod_materia = 106;
+```
+El ```AS``` es simplemente un apodo que le damos al encabezado original de las columnas para dar un resultado mas limpio y claro, ya que por ejemplo, el "nombre" de la materia en su tabla original es un encabezado que funciona pero aqui puede resultar ambiguo, asi que se renombra solo para esta consulta como "materia".
+
+## Delete
+Sirve para eliminara una fila de información especifica.
 
 
