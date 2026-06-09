@@ -2,7 +2,7 @@
 
 Para la siguiente practica en postgreSQL, se creo una base de datos bastante simple de la estructura de una universidad en su proceso de registro de notas, estudiantes, profesores, etc..., a partir de su respectivo diagrama MER y MR por lo cual no fue necesario normalizar.
 
-Se le aplicara a la base de datos, editada en pgAdmin4, los procesos de DDL, DML.
+Se le aplicara a la base de datos, editada en pgAdmin4, los procesos de DDL, DML y secuencias PSQL.
 
 # DDL (Data Definition Language): 
 Es el proceso de definir, crear y modificar la estructura de los objetos en una base de datos, es decir, columnas. 
@@ -188,6 +188,30 @@ Podemos consultar la tabla para ver que se ha creado una nueva fila para estar c
 DELETE FROM carrera WHERE cod_carrera = '5';
 ```
 Con esto quedaria eliminado.
+
+## Secuencias PSQL
+Son objetos que permiten generar números enteros unicos, lo cual es realmente util para usarse en la formación de claves primarias, como por ejemplo en ```cod_materia```.
+```sql
+CREATE SEQUENCE sec_cod_carrera START WITH 5;
+ALTER TABLE carrera
+ALTER COLUMN cod_carrera SET DEFAULT nextval('sec_cod_carrera');
+```
+Con esto ya no tenemos la necesidad de al ingresar datos, tener que volver a escribir manualmente el codigo de la carrera. Ejemplo:
+```sql
+INSERT INTO carrera(nombre, facultad)
+VALUES ('Medicina', 'Medicina');
+```
+Ahora con la tabla de materias.
+```sql
+CREATE SEQUENCE sec_cod_materia START WITH 107;
+ALTER TABLE materias
+ALTER COLUMN cod_materia SET DEFAULT nextval('sec_cod_materia');
+
+INSERT INTO materias(nombre, facultad)
+VALUES 
+	('Anatomía Humana y Embriologia', 'Medicina')
+	('Bioquímica y Fisiología', 'Medicina');
+```
 
 Ahora se continuara con el apartado de joins y consultas avanzadas
 [Ir a Consultas Avanzadas (Joins)](CONSULTAS_AVANZADAS.md)
