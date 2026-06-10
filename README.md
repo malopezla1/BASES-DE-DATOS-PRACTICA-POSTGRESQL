@@ -209,7 +209,7 @@ ALTER COLUMN cod_materia SET DEFAULT nextval('sec_cod_materia');
 
 INSERT INTO materias(nombre, facultad)
 VALUES 
-	('Anatomía Humana y Embriologia', 'Medicina')
+	('Anatomía Humana y Embriologia', 'Medicina'),
 	('Bioquímica y Fisiología', 'Medicina');
 ```
 
