@@ -106,7 +106,7 @@ VALUES
     (9, 107, 1020304050, 2026, 1), 
     (10, 108, 1030405060, 2026, 1);
 
---Como en nuestro nuevo modelo trasladamos el año y semestre a curso, entonces lo mejor es limpiar la tabla matriculas y reinsertar datos
+--Como en nuestro nuevo modelo trasladamos el año y semestre a curso, entonces lo mejor es eliminar la tabla matriculas y reinsertar datos
 DROP TABLE IF EXISTS matricula;
 
 CREATE TABLE matricula (
