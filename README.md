@@ -213,5 +213,5 @@ VALUES
 	('Bioquímica y Fisiología', 'Medicina');
 ```
 
-Ahora se continuara con el apartado de joins y consultas avanzadas
+Ahora se continuara con el apartado de joins y consultas avanzadas.
 [Ir a Consultas Avanzadas (Joins)](CONSULTAS_AVANZADAS.md)
