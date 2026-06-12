@@ -152,8 +152,10 @@ FROM estudiante e LEFT JOIN matricula m ON e.cod_estudiante = m.cod_estudiante;
 ```
 
 6. Mostrar las materias que no tienen ningún estudiante matriculado.
-Lo mismo que en la pasada, como todas nuestras materias tienen estudiantes matriculadas, entonces nuestra salida sera vacia, pero si fuese el caso donde ocurriese, añadiriamos una especficiación donde el cod_estudiante sea ```NULL```
+Lo mismo que en la pasada, como todas nuestras materias tienen estudiantes matriculadas, entonces nuestra salida sera vacia, pero si fuese el caso donde ocurriese, añadiriamos una especificiación donde el cod_estudiante sea ```NULL```
 ```sql
+INSERT INTO materias (cod_materia, nombre, facultad)
+VALUES (111, 'Neuronatomía Clínica'
 SELECT 
 	mat.cod_materia AS "codigo",
 	mat.nombre AS "materia"
