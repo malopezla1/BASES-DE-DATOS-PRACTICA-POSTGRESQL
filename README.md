@@ -272,5 +272,23 @@ Aqui creamos la vista del reporte de notas general, por lo cual si queremos ver 
 ```sql
 SELECT * FROM v_reporte_notas;
 ```
+![Tabla Reporte Notas](Capturas%20de%20pantalla%20Bases%20de%20Datos/Reporte_notas.png)
+
+Como hicimos varios cambios en la base de datos, con algunos incluso hechos en nuestro siguiente apartado de joins, las capturas de pantalla acerca de las tablas se pondran aqui abajo, siendo su condición final.
+## Tabla Carrera
+![Tabla Carrera](Capturas%20de%20pantalla%20Bases%20de%20Datos/Tabla_carrera.png)
+## Tabla Estudiante
+![Tabla Estudiante](Capturas%20de%20pantalla%20Bases%20de%20Datos/Tabla_estudiante.png)
+## Tabla Materias
+![Tabla Materias](Capturas%20de%20pantalla%20Bases%20de%20Datos/Tabla_materias.png)
+## Tabla Profesor
+![Tabla Profesor](Capturas%20de%20pantalla%20Bases%20de%20Datos/Tabla_profesor.png)
+
+Mas adelante se muestra la razon por la cual la tabla matricual fue dividida en matricula y curso.
+## Tabla Matricula
+![Tabla Matricula](Capturas%20de%20pantalla%20Bases%20de%20Datos/Tabla_matricula.png)
+## Tabla Curso
+![Tabla Curso](Capturas%20de%20pantalla%20Bases%20de%20Datos/Tabla_curso.png)
+
 Ahora se continuara con el apartado de joins y consultas avanzadas.
 [Ir a Consultas Avanzadas (Joins)](CONSULTAS_AVANZADAS.md)
