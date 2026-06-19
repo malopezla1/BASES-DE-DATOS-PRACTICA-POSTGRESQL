@@ -213,5 +213,64 @@ VALUES
 	('Bioquímica y Fisiología', 'Medicina');
 ```
 
+# Checks
+Sirven para validar ciertas condiciones para que no rompan la estructura de la base de datos.
+
+## Validar notas
+Valida que la nota sea mayor o igual a 0 y menor o igual a 5.0
+```sql
+ALTER TABLE matricula
+ADD CONSTRAINT chk_rango_notas
+CHECK (nota_final >= 0.0 AND nota_final <= 5.0);
+```
+
+## Cedula y Codigos positivos
+Valida que los codigos de reconocimiento sean positivos.
+```sql
+ALTER TABLE profesor
+ADD CONSTRAINT chk_cedula_positiva
+CHECK (cedula > 0);
+
+ALTER TABLE estudiante 
+ADD CONSTRAINT chk_codigo_estudiante_positivo
+CHECK (cod_estudiante > 0);
+```
+
+## Formato Email
+Valida que se ingrese correctamente la extension del email.
+```sql
+ALTER TABLE estudiante
+ADD CONSTRAINT chk_email_institucional_unal
+CHECK (email LIKE '%@unal.edu.co');
+```
+
+## Semestres
+Valida que se ingresen datos de semestre solo 1 y 2.
+```sql
+ALTER TABLE curso
+ADD CONSTRAINT chk_semestres_validos
+CHECK (semestre IN (1, 2));
+```
+
+# Vistas 
+Una vista es una tabla virtual que guarda el resultado de una consulta que se vaya a repetir mucho con la finalidad de no repetir la sintaxis de una consulta indefiniadamente cada que se necesite esa información, si no que esta vista guardara esa información y solo se llamara directament.
+```sql
+CREATE OR REPLACE VIEW v_reporte_notas AS
+SELECT
+	e.cod_estudiante AS "Código",
+	e.nombre_completo AS "Estudiante",
+	mat.nombre AS "Materia",
+	p.nombre AS "Profesor",
+	m.nota_final AS "Nota"
+FROM estudiante e
+INNER JOIN matricula m ON e.cod_estudiante = m.cod_estudiante
+INNER JOIN curso c ON m.id_curso = c.id_curso
+INNER JOIN materias mat ON c.cod_materia = mat.cod_materia
+INNER JOIN profesor p ON c.cedula_profesor = p.cedula;
+```
+Aqui creamos la vista del reporte de notas general, por lo cual si queremos ver esta informacion solo tendriamos que hacer una consula sencilla en vez de repetir todas esas lineas de codigo.
+```sql
+SELECT * FROM v_reporte_notas;
+```
 Ahora se continuara con el apartado de joins y consultas avanzadas.
 [Ir a Consultas Avanzadas (Joins)](CONSULTAS_AVANZADAS.md)
