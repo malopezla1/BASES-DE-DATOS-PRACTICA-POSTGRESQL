@@ -19,7 +19,7 @@ SELECT
 FROM materias mat 
 INNER JOIN carrera c ON mat.facultad = c.facultad;
 ```
-3. Mostrar el nombre del estudiante, la materia que cursó y la nota obtenida.
+3. Mostrar el nombre del estudiante, la materia que cursó y la nota obtenida. (Actualizada con Matricula y Curso)
 ```sql
 SELECT 
 	e.nombre_completo AS "estudiante",
@@ -27,7 +27,8 @@ SELECT
 	m.nota_final AS "nota"
 FROM estudiante e
 INNER JOIN matricula m ON e.cod_estudiante = m.cod_estudiante 
-INNER JOIN materias mat ON m.cod_materia = mat.cod_materia;
+INNER JOIN curso c ON m.id_curso = c.id_curso
+INNER JOIN materias mat ON c.cod_materia = mat.cod_materia;
 ```
 4. Mostrar el nombre del estudiante, la materia, el profesor que la dictó y la nota.
 ```sql
@@ -148,15 +149,16 @@ Todos nuestros estudiantes estan matriculados pero en caso de que alguno no lo e
 SELECT 
 	e.cod_estudiante AS "código",
 	e.nombre_completo AS "estudiante"
-FROM estudiante e LEFT JOIN matricula m ON e.cod_estudiante = m.cod_estudiante;
+FROM estudiante e LEFT JOIN matricula m ON e.cod_estudiante = m.cod_estudiante
+GROUP BY e.cod_estudiante, e.nombre_completo;
 ```
 
 6. Mostrar las materias que no tienen ningún estudiante matriculado.
 Lo mismo que en la pasada, como todas nuestras materias tienen estudiantes matriculadas, entonces nuestra salida sera vacia, pero si fuese el caso donde ocurriese, añadiriamos una especificiación donde el cod_estudiante sea ```NULL```
 ```sql
 -- Agregamos una materia que no esta matriculada por nadie para ejemplificar.
-INSERT INTO materias (cod_materia, nombre, facultad)
-VALUES (111, 'Neuroanatomía Clínica', 'Medicina');
+INSERT INTO materias (nombre, facultad)
+VALUES ('Neuroanatomía Clínica', 'Medicina');
 
 SELECT 
 	mat.cod_materia AS "codigo",
